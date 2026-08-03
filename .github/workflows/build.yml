@@ -57,6 +57,8 @@ jobs:
         run: cmake --build build
 
       - name: Test
+        env:
+          QT_QPA_PLATFORM: offscreen
         run: ctest --test-dir build --output-on-failure
 
       - name: Stage install tree
@@ -112,12 +114,21 @@ jobs:
           modules: qtimageformats qtshadertools
           cache: true
 
+      - name: Inspect Vulkan SDK layout
+        shell: bash
+        run: |
+          echo "VULKAN_SDK=${VULKAN_SDK:-unset}"
+          ls "${VULKAN_SDK}/share/cmake" 2>/dev/null || echo "no share/cmake"
+          find "${VULKAN_SDK}" -iname "SPIRV-HeadersConfig*.cmake" 2>/dev/null | head -3 || true
+
       - name: Configure
+        shell: bash
         run: >
           cmake -B build -G Ninja
           -DCMAKE_BUILD_TYPE=Release
           -DSD_VULKAN=ON
           -DGGML_NATIVE=OFF
+          -DCMAKE_PREFIX_PATH="${VULKAN_SDK}"
 
       - name: Build
         run: cmake --build build
