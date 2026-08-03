@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "models": [
+    {
+      "id": "sd15-emaonly",
+      "name": "Stable Diffusion 1.5",
+      "family": "SD1.x",
+      "license_name": "CreativeML OpenRAIL-M",
+      "license_url": "https://huggingface.co/stable-diffusion-v1-5/stable-diffusion-v1-5/blob/main/LICENSE.md",
+      "notes": "Fast and light. Best at 512x512; larger sizes tend to repeat subjects.",
+      "default_sampler": "euler_a",
+      "default_steps": 20,
+      "default_cfg_scale": 7.0,
+      "default_width": 512,
+      "default_height": 512,
+      "total_size_bytes": 4265146304,
+      "files": [
+        {
+          "role": "checkpoint",
+          "filename": "v1-5-pruned-emaonly.safetensors",
+          "url": "https://huggingface.co/stable-diffusion-v1-5/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.safetensors",
+          "sha256": "6ce0161689b3853acaa03779ec93eafe75a02f4ced659bee03f50797806fa2fa",
+          "size_bytes": 4265146304
+        }
+      ]
+    },
+    {
+      "id": "sdxl-base-1.0",
+      "name": "SDXL Base 1.0",
+      "family": "SDXL",
+      "license_name": "CreativeML OpenRAIL++-M",
+      "license_url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/blob/main/LICENSE.md",
+      "notes": "Native 1024x1024. Noticeably slower than SD1.5 and needs more memory.",
+      "default_sampler": "euler",
+      "default_steps": 30,
+      "default_cfg_scale": 7.0,
+      "default_width": 1024,
+      "default_height": 1024,
+      "total_size_bytes": 6938078334,
+      "files": [
+        {
+          "role": "checkpoint",
+          "filename": "sd_xl_base_1.0.safetensors",
+          "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors",
+          "sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b",
+          "size_bytes": 6938078334
+        }
+      ]
+    },
+    {
+      "id": "flux1-schnell-q4ks",
+      "name": "FLUX.1 schnell (Q4_K_S)",
+      "family": "Flux",
+      "license_name": "Apache-2.0",
+      "license_url": "https://huggingface.co/black-forest-labs/FLUX.1-schnell/blob/main/LICENSE.md",
+      "notes": "Four files: transformer, two text encoders, and the VAE. Produces good results in as few as 4 steps and ignores CFG.",
+      "default_sampler": "euler",
+      "default_steps": 4,
+      "default_cfg_scale": 1.0,
+      "default_width": 1024,
+      "default_height": 1024,
+      "total_size_bytes": 12259327156,
+      "files": [
+        {
+          "role": "diffusion_model",
+          "filename": "flux1-schnell-Q4_K_S.gguf",
+          "url": "https://huggingface.co/city96/FLUX.1-schnell-gguf/resolve/main/flux1-schnell-Q4_K_S.gguf",
+          "sha256": "4fd16477b3a5296d0cf722c4b92a9fd7f30d09ac7495826e4465d8de9c9fd973",
+          "size_bytes": 6783943712
+        },
+        {
+          "role": "clip_l",
+          "filename": "clip_l.safetensors",
+          "url": "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/clip_l.safetensors",
+          "sha256": "660c6f5b1abae9dc498ac2d21e1347d2abdb0cf6c0c0c8576cd796491d9a6cdd",
+          "size_bytes": 246144152
+        },
+        {
+          "role": "t5xxl",
+          "filename": "t5xxl_fp8_e4m3fn.safetensors",
+          "url": "https://huggingface.co/comfyanonymous/flux_text_encoders/resolve/main/t5xxl_fp8_e4m3fn.safetensors",
+          "sha256": "7d330da4816157540d6bb7838bf63a0f02f573fc48ca4d8de34bb0cbfd514f09",
+          "size_bytes": 4893934904
+        },
+        {
+          "role": "vae",
+          "filename": "ae.safetensors",
+          "url": "https://huggingface.co/second-state/FLUX.1-schnell-GGUF/resolve/main/ae.safetensors",
+          "sha256": "afc8e28272cd15db3919bacdb6918ce9c1ed22e96cb12c4d5ed0fba823529e38",
+          "size_bytes": 335304388
+        }
+      ]
+    }
+  ]
+}
