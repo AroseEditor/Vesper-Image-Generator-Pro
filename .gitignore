@@ -29,10 +29,10 @@ _deps/
 *.gguf
 *.pt
 *.pth
-models/
+/models/
 
-output/
-gallery/
+/output/
+/gallery/
 *.composition.json
 
 .vs/
