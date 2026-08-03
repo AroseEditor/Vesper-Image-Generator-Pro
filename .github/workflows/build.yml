@@ -37,8 +37,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y ninja-build libgl1-mesa-dev libglu1-mesa-dev \
-            libxkbcommon-dev libvulkan-dev glslang-tools glslc libfuse2 \
-            libxcb-cursor0 libxcb-xinerama0 file desktop-file-utils
+            libxkbcommon-dev libvulkan-dev glslang-tools glslc spirv-headers \
+            libfuse2 libxcb-cursor0 libxcb-xinerama0 file desktop-file-utils
 
       - uses: jurplel/install-qt-action@v4
         with:
@@ -103,7 +103,7 @@ jobs:
           vulkan_version: 1.4.309.0
           install_runtime: false
           cache: true
-          stripdown: true
+          stripdown: false
 
       - uses: jurplel/install-qt-action@v4
         with:
