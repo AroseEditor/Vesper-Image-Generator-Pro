@@ -1,0 +1,54 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": { "major": 3, "minor": 21, "patch": 0 },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+      }
+    },
+    {
+      "name": "windows-cpu",
+      "inherits": "base",
+      "displayName": "Windows CPU",
+      "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Windows" }
+    },
+    {
+      "name": "windows-vulkan",
+      "inherits": "base",
+      "displayName": "Windows Vulkan",
+      "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Windows" },
+      "cacheVariables": { "SD_VULKAN": "ON" }
+    },
+    {
+      "name": "linux-vulkan",
+      "inherits": "base",
+      "displayName": "Linux Vulkan",
+      "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Linux" },
+      "cacheVariables": { "SD_VULKAN": "ON" }
+    },
+    {
+      "name": "macos-metal",
+      "inherits": "base",
+      "displayName": "macOS Metal",
+      "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Darwin" },
+      "cacheVariables": { "SD_METAL": "ON" }
+    }
+  ],
+  "buildPresets": [
+    { "name": "windows-cpu", "configurePreset": "windows-cpu" },
+    { "name": "windows-vulkan", "configurePreset": "windows-vulkan" },
+    { "name": "linux-vulkan", "configurePreset": "linux-vulkan" },
+    { "name": "macos-metal", "configurePreset": "macos-metal" }
+  ],
+  "testPresets": [
+    { "name": "windows-cpu", "configurePreset": "windows-cpu", "output": { "outputOnFailure": true } },
+    { "name": "linux-vulkan", "configurePreset": "linux-vulkan", "output": { "outputOnFailure": true } },
+    { "name": "macos-metal", "configurePreset": "macos-metal", "output": { "outputOnFailure": true } }
+  ]
+}

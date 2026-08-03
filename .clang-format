@@ -1,0 +1,13 @@
+---
+Language: Cpp
+BasedOnStyle: LLVM
+IndentWidth: 4
+ColumnLimit: 110
+AccessModifierOffset: -4
+AllowShortFunctionsOnASingleLine: Inline
+AlwaysBreakTemplateDeclarations: Yes
+BreakBeforeBraces: Attach
+NamespaceIndentation: None
+PointerAlignment: Left
+SortIncludes: CaseSensitive
+SpaceAfterTemplateKeyword: false
