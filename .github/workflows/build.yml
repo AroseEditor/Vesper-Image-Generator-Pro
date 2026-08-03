@@ -114,13 +114,6 @@ jobs:
           modules: qtimageformats qtshadertools
           cache: true
 
-      - name: Inspect Vulkan SDK layout
-        shell: bash
-        run: |
-          echo "VULKAN_SDK=${VULKAN_SDK:-unset}"
-          ls "${VULKAN_SDK}/share/cmake" 2>/dev/null || echo "no share/cmake"
-          find "${VULKAN_SDK}" -iname "SPIRV-HeadersConfig*.cmake" 2>/dev/null | head -3 || true
-
       - name: Configure
         shell: bash
         run: >

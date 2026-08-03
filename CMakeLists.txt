@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.24)
 
 project(VesperImageGenerator
     VERSION 0.1.0
@@ -24,6 +24,20 @@ endif()
 
 if(MSVC)
     add_compile_options(/bigobj)
+endif()
+
+if(SD_VULKAN)
+    find_package(SPIRV-Headers CONFIG QUIET)
+    if(NOT SPIRV-Headers_FOUND)
+        include(FetchContent)
+        FetchContent_Declare(SPIRV-Headers
+            GIT_REPOSITORY https://github.com/KhronosGroup/SPIRV-Headers.git
+            GIT_TAG vulkan-sdk-1.4.309.0
+            GIT_SHALLOW TRUE
+            OVERRIDE_FIND_PACKAGE
+        )
+        FetchContent_MakeAvailable(SPIRV-Headers)
+    endif()
 endif()
 
 set(SD_BUILD_EXAMPLES ON CACHE BOOL "" FORCE)
