@@ -1,4 +1,4 @@
-find_package(Qt6 REQUIRED COMPONENTS Test Gui)
+find_package(Qt6 REQUIRED COMPONENTS Test Gui Qml)
 
 set(VESPER_TEST_SOURCES
     ${CMAKE_SOURCE_DIR}/src/app/ByteFormat.cpp
@@ -13,7 +13,7 @@ set(VESPER_TEST_SOURCES
 function(vesper_add_test name)
     qt_add_executable(${name} ${name}.cpp ${VESPER_TEST_SOURCES})
     target_include_directories(${name} PRIVATE ${CMAKE_SOURCE_DIR}/src)
-    target_link_libraries(${name} PRIVATE Qt6::Test Qt6::Gui)
+    target_link_libraries(${name} PRIVATE Qt6::Test Qt6::Gui Qt6::Qml)
     target_compile_definitions(${name} PRIVATE VESPER_VERSION="${PROJECT_VERSION}")
     add_test(NAME ${name} COMMAND ${name})
 endfunction()

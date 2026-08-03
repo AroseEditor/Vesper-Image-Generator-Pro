@@ -1,6 +1,7 @@
 #include "gallery/GenerationMetadata.h"
 
 #include <QDateTime>
+#include <QDir>
 #include <QFile>
 #include <QFileInfo>
 #include <QJsonDocument>

@@ -10,7 +10,6 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set(CMAKE_AUTOMOC ON)
 
 set(VESPER_DISPLAY_NAME "Vesper Image Generator Pro")
 set(VESPER_ORGANIZATION "Vesper")
@@ -21,6 +20,10 @@ option(VESPER_BUILD_TESTS "Build unit tests" ON)
 if(APPLE)
     set(SD_METAL ON CACHE BOOL "" FORCE)
     enable_language(OBJCXX)
+endif()
+
+if(MSVC)
+    add_compile_options(/bigobj)
 endif()
 
 set(SD_BUILD_EXAMPLES ON CACHE BOOL "" FORCE)
@@ -116,7 +119,15 @@ qt_add_qml_module(VesperImageGenerator
         resources/templates/poster.json
 )
 
-target_include_directories(VesperImageGenerator PRIVATE src)
+target_include_directories(VesperImageGenerator PRIVATE
+    src
+    src/app
+    src/models
+    src/inference
+    src/gallery
+    src/compositor
+    src/platform
+)
 
 target_link_libraries(VesperImageGenerator PRIVATE
     Qt6::Core Qt6::Gui Qt6::Quick Qt6::Qml

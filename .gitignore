@@ -54,6 +54,8 @@ venv/
 
 Qt/
 aqtinstall.log
+build.bat
+.claude/
 
 Output/
 *.dmg

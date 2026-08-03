@@ -3,6 +3,7 @@
 #include "compositor/CompositionRenderer.h"
 #include "compositor/TemplateCatalog.h"
 
+#include <QDir>
 #include <QFile>
 #include <QFileInfo>
 #include <QImageReader>
