@@ -3,8 +3,6 @@ import QtQuick.Controls.Basic
 import QtQuick.Layouts
 import QtQuick.Dialogs
 import Vesper
-import Vesper.theme
-import Vesper.components
 
 Item {
     id: root

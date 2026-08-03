@@ -1,5 +1,5 @@
+import Vesper
 import QtQuick
-import Vesper.theme
 
 Text {
     color: Theme.textMuted

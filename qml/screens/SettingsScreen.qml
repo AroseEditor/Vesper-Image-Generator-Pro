@@ -2,8 +2,6 @@ import QtQuick
 import QtQuick.Controls.Basic
 import QtQuick.Layouts
 import Vesper
-import Vesper.theme
-import Vesper.components
 
 Item {
     id: root
@@ -164,12 +162,15 @@ Item {
                         model: ModelCatalog
 
                         delegate: RowLayout {
-                            required property string modelId
-                            required property string name
-                            required property int state
+                            id: installedRow
+
+                            required property var model
+
+                            readonly property string rowModelId: model.modelId
+                            readonly property string rowName: model.name
 
                             Layout.fillWidth: true
-                            visible: state === 3
+                            visible: model.state === 3
                             spacing: Theme.gapMedium
 
                             ColumnLayout {
@@ -177,13 +178,13 @@ Item {
                                 spacing: 1
 
                                 Text {
-                                    text: parent.parent.name
+                                    text: installedRow.rowName
                                     color: Theme.text
                                     font.pixelSize: Theme.fontBody
                                 }
 
                                 Text {
-                                    text: ModelCatalog.installedSizeLabel(parent.parent.modelId)
+                                    text: ModelCatalog.installedSizeLabel(installedRow.rowModelId)
                                           + " on disk"
                                     color: Theme.textFaint
                                     font.pixelSize: Theme.fontMicro
@@ -196,10 +197,10 @@ Item {
                                 implicitWidth: 92
                                 implicitHeight: 32
                                 onClicked: {
-                                    root.pendingRemovalId = parent.modelId;
-                                    root.pendingRemovalName = parent.name;
+                                    root.pendingRemovalId = installedRow.rowModelId;
+                                    root.pendingRemovalName = installedRow.rowName;
                                     root.pendingRemovalSize =
-                                        ModelCatalog.installedSizeLabel(parent.modelId);
+                                        ModelCatalog.installedSizeLabel(installedRow.rowModelId);
                                     removeDialog.open();
                                 }
                             }

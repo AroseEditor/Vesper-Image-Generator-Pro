@@ -2,9 +2,6 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Effects
 import Vesper
-import Vesper.theme
-import Vesper.components
-import Vesper.screens
 
 Window {
     id: window
@@ -144,7 +141,6 @@ Window {
 
             DragHandler {
                 target: null
-                acceptedDevices: PointerDevice.GenericPointer
                 grabPermissions: PointerHandler.CanTakeOverFromAnything
                 onActiveChanged: if (active) window.startSystemMove()
             }

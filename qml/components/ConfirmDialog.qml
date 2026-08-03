@@ -1,6 +1,6 @@
+import Vesper
 import QtQuick
 import QtQuick.Controls.Basic
-import Vesper.theme
 
 Dialog {
     id: root

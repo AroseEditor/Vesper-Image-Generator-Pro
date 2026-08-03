@@ -3,8 +3,6 @@ import QtQuick.Controls.Basic
 import QtQuick.Layouts
 import QtQuick.Dialogs
 import Vesper
-import Vesper.theme
-import Vesper.components
 
 Item {
     id: root
@@ -62,28 +60,16 @@ Item {
                             id: layerItem
 
                             required property int index
-                            required property string text
-                            required property real x
-                            required property real y
-                            required property real width
-                            required property real fontSize
-                            required property string fontFamily
-                            required property string alignment
-                            required property color color
-                            required property real lineHeight
-                            required property real opacity
-                            required property bool bold
-                            required property bool italic
-                            required property real rotation
+                            required property var model
 
                             readonly property bool selected: document.selectedIndex === index
 
-                            x: layerItem.x * canvas.width
-                            y: layerItem.y * canvas.height
-                            width: layerItem.width * canvas.width
+                            x: model.x * canvas.width
+                            y: model.y * canvas.height
+                            width: model.width * canvas.width
                             height: layerText.implicitHeight
-                            rotation: layerItem.rotation
-                            opacity: layerItem.opacity
+                            rotation: model.rotation
+                            opacity: model.opacity
 
                             Rectangle {
                                 anchors.fill: parent
@@ -98,18 +84,18 @@ Item {
                             Text {
                                 id: layerText
                                 width: parent.width
-                                text: layerItem.text
-                                color: layerItem.color
-                                font.family: layerItem.fontFamily
-                                font.pixelSize: Math.max(1, layerItem.fontSize * canvas.height)
-                                font.bold: layerItem.bold
-                                font.italic: layerItem.italic
-                                lineHeight: layerItem.lineHeight
+                                text: layerItem.model.text
+                                color: layerItem.model.color
+                                font.family: layerItem.model.fontFamily
+                                font.pixelSize: Math.max(1, layerItem.model.fontSize * canvas.height)
+                                font.bold: layerItem.model.bold
+                                font.italic: layerItem.model.italic
+                                lineHeight: layerItem.model.lineHeight
                                 lineHeightMode: Text.ProportionalHeight
                                 wrapMode: Text.WordWrap
-                                horizontalAlignment: layerItem.alignment === "center"
+                                horizontalAlignment: layerItem.model.alignment === "center"
                                                      ? Text.AlignHCenter
-                                                     : (layerItem.alignment === "right"
+                                                     : (layerItem.model.alignment === "right"
                                                         ? Text.AlignRight : Text.AlignLeft)
                             }
 
@@ -124,10 +110,10 @@ Item {
                                 onCentroidChanged: {
                                     if (!active)
                                         return;
-                                    const nx = (layerItem.x * canvas.width
+                                    const nx = (layerItem.model.x * canvas.width
                                                 + centroid.position.x - centroid.pressPosition.x)
                                                / canvas.width;
-                                    const ny = (layerItem.y * canvas.height
+                                    const ny = (layerItem.model.y * canvas.height
                                                 + centroid.position.y - centroid.pressPosition.y)
                                                / canvas.height;
                                     document.moveLayer(layerItem.index,
@@ -151,7 +137,7 @@ Item {
                                     onCentroidChanged: {
                                         if (!active)
                                             return;
-                                        const nw = (layerItem.width * canvas.width
+                                        const nw = (layerItem.model.width * canvas.width
                                                     + centroid.position.x - centroid.pressPosition.x)
                                                    / canvas.width;
                                         document.resizeLayer(layerItem.index,
@@ -245,8 +231,10 @@ Item {
                         model: document
 
                         delegate: Rectangle {
+                            id: layerRow
+
                             required property int index
-                            required property string text
+                            required property var model
 
                             Layout.fillWidth: true
                             implicitHeight: 32
@@ -259,7 +247,7 @@ Item {
                                 anchors.leftMargin: 10
                                 anchors.right: removeButton.left
                                 anchors.verticalCenter: parent.verticalCenter
-                                text: parent.text.split("\n")[0]
+                                text: String(layerRow.model.text).split("\n")[0]
                                 color: Theme.text
                                 font.pixelSize: Theme.fontSmall
                                 elide: Text.ElideRight
@@ -274,10 +262,10 @@ Item {
                                 color: Theme.textFaint
                                 font.pixelSize: Theme.fontSmall
 
-                                TapHandler { onTapped: document.removeLayer(index) }
+                                TapHandler { onTapped: document.removeLayer(layerRow.index) }
                             }
 
-                            TapHandler { onTapped: document.selectedIndex = index }
+                            TapHandler { onTapped: document.selectedIndex = layerRow.index }
                         }
                     }
 

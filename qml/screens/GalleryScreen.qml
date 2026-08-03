@@ -3,8 +3,6 @@ import QtQuick.Controls.Basic
 import QtQuick.Layouts
 import QtQuick.Dialogs
 import Vesper
-import Vesper.theme
-import Vesper.components
 
 Item {
     id: root
@@ -116,6 +114,8 @@ Item {
             }
 
             GlassPanel {
+                id: detailPanel
+
                 Layout.preferredWidth: 316
                 Layout.fillHeight: true
                 visible: root.selectedRow >= 0
@@ -138,7 +138,7 @@ Item {
 
                         Text {
                             Layout.fillWidth: true
-                            text: parent.parent.parent.details.prompt || "No metadata recorded"
+                            text: detailPanel.details.prompt || "No metadata recorded"
                             color: Theme.text
                             font.pixelSize: Theme.fontSmall
                             wrapMode: Text.WordWrap
@@ -155,7 +155,7 @@ Item {
 
                             Repeater {
                                 model: {
-                                    const d = parent.parent.parent.parent.details;
+                                    const d = detailPanel.details;
                                     return [
                                         { key: "Model", value: d.modelId || "" },
                                         { key: "Seed", value: d.seed !== undefined ? String(d.seed) : "" },

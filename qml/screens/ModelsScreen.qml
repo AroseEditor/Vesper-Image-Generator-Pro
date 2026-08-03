@@ -2,8 +2,6 @@ import QtQuick
 import QtQuick.Controls.Basic
 import QtQuick.Layouts
 import Vesper
-import Vesper.theme
-import Vesper.components
 
 Item {
     id: root
@@ -61,21 +59,22 @@ Item {
             delegate: GlassPanel {
                 id: card
 
-                required property string modelId
-                required property string name
-                required property string family
-                required property string sizeLabel
-                required property string licenseName
-                required property string licenseUrl
-                required property string notes
-                required property int state
-                required property string stateLabel
-                required property real progress
-                required property string statusDetail
-                required property int fileCount
+                required property var model
 
-                readonly property bool installed: state === 3
-                readonly property bool busy: state === 1 || state === 2
+                readonly property string modelId: model.modelId
+                readonly property string name: model.name
+                readonly property string family: model.family
+                readonly property string sizeLabel: model.sizeLabel
+                readonly property string licenseName: model.licenseName
+                readonly property string licenseUrl: model.licenseUrl
+                readonly property string notes: model.notes
+                readonly property int modelState: model.state
+                readonly property real progress: model.progress
+                readonly property string statusDetail: model.statusDetail
+                readonly property int fileCount: model.fileCount
+
+                readonly property bool installed: modelState === 3
+                readonly property bool busy: modelState === 1 || modelState === 2
                 readonly property bool licenseOk: AppSettings.licenseAccepted(card.modelId)
 
                 width: modelList.width - 8
@@ -247,7 +246,7 @@ Item {
                         Text {
                             Layout.fillWidth: true
                             text: card.statusDetail
-                            color: card.state === 4 ? Theme.danger : Theme.textFaint
+                            color: card.modelState === 4 ? Theme.danger : Theme.textFaint
                             font.pixelSize: Theme.fontMicro
                             wrapMode: Text.WordWrap
                         }
@@ -267,7 +266,7 @@ Item {
 
                         GlassButton {
                             text: card.installed ? "Installed"
-                                                 : (card.state === 4 ? "Retry" : "Download")
+                                                 : (card.modelState === 4 ? "Retry" : "Download")
                             primary: !card.installed
                             implicitWidth: 128
                             visible: !card.busy

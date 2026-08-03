@@ -92,26 +92,36 @@ endif()
 
 qt_add_executable(VesperImageGenerator ${VESPER_SOURCES})
 
+set(VESPER_QML_FILES
+    qml/Main.qml
+    qml/theme/Theme.qml
+    qml/components/GlassPanel.qml
+    qml/components/GlassButton.qml
+    qml/components/GlassField.qml
+    qml/components/GlassSlider.qml
+    qml/components/GlassCombo.qml
+    qml/components/TitleBar.qml
+    qml/components/NavRail.qml
+    qml/components/ConfirmDialog.qml
+    qml/components/SectionLabel.qml
+    qml/screens/GenerateScreen.qml
+    qml/screens/ModelsScreen.qml
+    qml/screens/GalleryScreen.qml
+    qml/screens/ComposerScreen.qml
+    qml/screens/SettingsScreen.qml
+)
+
+foreach(qml_file IN LISTS VESPER_QML_FILES)
+    get_filename_component(qml_name "${qml_file}" NAME)
+    set_source_files_properties("${qml_file}" PROPERTIES QT_RESOURCE_ALIAS "${qml_name}")
+endforeach()
+
+set_source_files_properties(qml/theme/Theme.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
+
 qt_add_qml_module(VesperImageGenerator
     URI Vesper
     VERSION 1.0
-    QML_FILES
-        qml/Main.qml
-        qml/theme/Theme.qml
-        qml/components/GlassPanel.qml
-        qml/components/GlassButton.qml
-        qml/components/GlassField.qml
-        qml/components/GlassSlider.qml
-        qml/components/GlassCombo.qml
-        qml/components/TitleBar.qml
-        qml/components/NavRail.qml
-        qml/components/ConfirmDialog.qml
-        qml/components/SectionLabel.qml
-        qml/screens/GenerateScreen.qml
-        qml/screens/ModelsScreen.qml
-        qml/screens/GalleryScreen.qml
-        qml/screens/ComposerScreen.qml
-        qml/screens/SettingsScreen.qml
+    QML_FILES ${VESPER_QML_FILES}
     RESOURCES
         resources/models.json
         resources/templates/letter.json

@@ -1,5 +1,5 @@
+import Vesper
 import QtQuick
-import Vesper.theme
 
 Item {
     id: root
