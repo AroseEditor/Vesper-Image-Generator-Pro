@@ -1,0 +1,52 @@
+{
+  "id": "letter",
+  "name": "Letter",
+  "description": "Split composition. Art on the right, an empty parchment panel on the left for the message.",
+  "suggested_width": 1024,
+  "suggested_height": 704,
+  "prompt_preset": "Split-composition editorial illustration, warm cinematic lighting, photographic quality, shallow depth of field. Left third: a soft cream parchment page with a thin ornate hand-drawn border and a small heart-shaped divider motif, left blank and empty, no text, no lettering, no writing of any kind on this side. Right two-thirds: a hopeful, photo-realistic scene of {SUBJECT_DESCRIPTION}, soft bokeh, fresh flowers, warm magenta and gold color grade. No readable text or signage with legible words anywhere in the image. Negative space preserved on the left third for typography to be added separately.",
+  "negative_preset": "text, lettering, words, handwriting, captions, watermark, signature, logo, typography, letters, numbers, blurry, low quality, distorted",
+  "layers": [
+    {
+      "id": "title",
+      "text": "With love",
+      "x": 0.06,
+      "y": 0.14,
+      "width": 0.24,
+      "font_size": 0.075,
+      "font_family": "Segoe Script",
+      "alignment": "left",
+      "color": "#5c2b4a",
+      "line_height": 1.1,
+      "opacity": 1.0,
+      "italic": true
+    },
+    {
+      "id": "body",
+      "text": "Write your message here.\n\nEvery line stays editable after the image is generated, so you can change the words, the font, and the spacing without touching the artwork.",
+      "x": 0.06,
+      "y": 0.3,
+      "width": 0.24,
+      "font_size": 0.026,
+      "font_family": "Georgia",
+      "alignment": "left",
+      "color": "#3a2c33",
+      "line_height": 1.45,
+      "opacity": 1.0
+    },
+    {
+      "id": "signature",
+      "text": "Yours,",
+      "x": 0.06,
+      "y": 0.82,
+      "width": 0.24,
+      "font_size": 0.034,
+      "font_family": "Segoe Script",
+      "alignment": "left",
+      "color": "#5c2b4a",
+      "line_height": 1.2,
+      "opacity": 1.0,
+      "italic": true
+    }
+  ]
+}

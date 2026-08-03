@@ -1,0 +1,38 @@
+{
+  "id": "card",
+  "name": "Card",
+  "description": "Square greeting card. Art fills the frame, text sits in a clear band across the lower third.",
+  "suggested_width": 1024,
+  "suggested_height": 1024,
+  "prompt_preset": "Greeting card illustration, soft painterly style, warm natural light, gentle depth of field. A composition of {SUBJECT_DESCRIPTION} occupying the upper two-thirds of the frame, with delicate botanical detail and a muted pastel palette. The lower third is an uncluttered wash of soft colour with no detail, no pattern, and no objects, reserved as clean negative space. No readable text or lettering anywhere in the image.",
+  "negative_preset": "text, lettering, words, handwriting, captions, watermark, signature, logo, typography, busy lower third, clutter, low quality",
+  "layers": [
+    {
+      "id": "title",
+      "text": "Happy Birthday",
+      "x": 0.1,
+      "y": 0.7,
+      "width": 0.8,
+      "font_size": 0.075,
+      "font_family": "Segoe Script",
+      "alignment": "center",
+      "color": "#4a2f52",
+      "line_height": 1.1,
+      "opacity": 1.0,
+      "italic": true
+    },
+    {
+      "id": "body",
+      "text": "A short line of warm words goes here.",
+      "x": 0.14,
+      "y": 0.82,
+      "width": 0.72,
+      "font_size": 0.028,
+      "font_family": "Georgia",
+      "alignment": "center",
+      "color": "#3d3340",
+      "line_height": 1.4,
+      "opacity": 1.0
+    }
+  ]
+}

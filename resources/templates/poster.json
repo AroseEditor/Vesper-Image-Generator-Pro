@@ -1,0 +1,40 @@
+{
+  "id": "poster",
+  "name": "Poster",
+  "description": "Tall poster. Full-bleed art with a heavy display title at the top and details at the foot.",
+  "suggested_width": 768,
+  "suggested_height": 1088,
+  "prompt_preset": "Bold graphic poster artwork, dramatic directional lighting, rich saturated colour, strong silhouette. A striking central composition of {SUBJECT_DESCRIPTION}, framed with generous empty margin at the top and bottom of the frame. Flat background gradient in those margins with no detail or objects. No readable text, letterforms, or signage anywhere in the image.",
+  "negative_preset": "text, lettering, words, captions, watermark, signature, logo, typography, cluttered margins, low quality, jpeg artifacts",
+  "layers": [
+    {
+      "id": "title",
+      "text": "HEADLINE",
+      "x": 0.08,
+      "y": 0.05,
+      "width": 0.84,
+      "font_size": 0.085,
+      "font_family": "Arial",
+      "alignment": "center",
+      "color": "#f4f1ea",
+      "line_height": 1.0,
+      "letter_spacing": 0.06,
+      "opacity": 1.0,
+      "bold": true
+    },
+    {
+      "id": "body",
+      "text": "Supporting line",
+      "x": 0.12,
+      "y": 0.87,
+      "width": 0.76,
+      "font_size": 0.026,
+      "font_family": "Arial",
+      "alignment": "center",
+      "color": "#f4f1ea",
+      "line_height": 1.35,
+      "letter_spacing": 0.14,
+      "opacity": 0.9
+    }
+  ]
+}
