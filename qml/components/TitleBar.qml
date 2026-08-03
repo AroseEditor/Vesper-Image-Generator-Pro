@@ -57,38 +57,69 @@ Item {
         spacing: 6
 
         Repeater {
-            model: [
-                { glyph: "–", action: "minimize" },
-                { glyph: "□", action: "maximize" },
-                { glyph: "×", action: "close" }
-            ]
+            model: ["minimize", "maximize", "close"]
 
             Rectangle {
-                required property var modelData
+                id: windowButton
+                required property string modelData
 
                 width: 30
                 height: 26
                 radius: Theme.radiusSmall - 2
                 color: hover.hovered
-                       ? (modelData.action === "close" ? Theme.danger : Qt.rgba(1, 1, 1, 0.12))
+                       ? (modelData === "close" ? Theme.danger : Qt.rgba(1, 1, 1, 0.12))
                        : "transparent"
 
                 Behavior on color { ColorAnimation { duration: Theme.durationFast } }
 
-                Text {
+                Rectangle {
                     anchors.centerIn: parent
-                    text: modelData.glyph
+                    width: 10
+                    height: 1
                     color: Theme.text
-                    font.pixelSize: modelData.action === "close" ? 15 : 12
+                    visible: windowButton.modelData === "minimize"
+                }
+
+                Rectangle {
+                    anchors.centerIn: parent
+                    width: 9
+                    height: 9
+                    color: "transparent"
+                    border.width: 1
+                    border.color: Theme.text
+                    visible: windowButton.modelData === "maximize"
+                }
+
+                Item {
+                    anchors.centerIn: parent
+                    width: 11
+                    height: 11
+                    visible: windowButton.modelData === "close"
+
+                    Rectangle {
+                        anchors.centerIn: parent
+                        width: parent.width
+                        height: 1
+                        color: Theme.text
+                        rotation: 45
+                    }
+
+                    Rectangle {
+                        anchors.centerIn: parent
+                        width: parent.width
+                        height: 1
+                        color: Theme.text
+                        rotation: -45
+                    }
                 }
 
                 HoverHandler { id: hover }
 
                 TapHandler {
                     onTapped: {
-                        if (modelData.action === "minimize")
+                        if (windowButton.modelData === "minimize")
                             root.minimizeRequested();
-                        else if (modelData.action === "maximize")
+                        else if (windowButton.modelData === "maximize")
                             root.maximizeRequested();
                         else
                             root.closeRequested();

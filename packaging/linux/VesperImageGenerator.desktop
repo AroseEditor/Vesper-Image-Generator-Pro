@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Vesper Image Generator Pro
+GenericName=Image Generator
+Comment=Offline local image generation
+Exec=VesperImageGenerator
+Icon=VesperImageGenerator
+Categories=Graphics;2DGraphics;
+Terminal=false
+StartupNotify=true
