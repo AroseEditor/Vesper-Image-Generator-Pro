@@ -23,7 +23,7 @@ _deps/
 *.pdb
 *.ilk
 *.exp
-
+.claude/
 *.safetensors
 *.ckpt
 *.gguf
