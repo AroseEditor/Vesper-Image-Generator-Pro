@@ -6,7 +6,9 @@ Built on [stable-diffusion.cpp](https://github.com/leejet/stable-diffusion.cpp) 
 
 ## Status
 
-In development. The repository currently holds project setup only. Nothing is packaged yet, and the sections below describe the target rather than shipped behavior. This note goes away when there is an installer to download.
+Early but working. The app builds and runs on Windows, downloads and verifies models, generates images through the bundled engine, and exports compositions. Verified so far on Windows with MSVC and Qt 6.9.3: full build, five passing test targets, a real SD1.5 generation, and a composition exported at 4x the background resolution.
+
+The macOS and Linux build paths are wired up in CI but have not been run on real hardware yet, and no release has been published. Treat those two platforms as untested.
 
 ## What it does
 
@@ -42,6 +44,14 @@ git submodule update --init --recursive
 
 Pass `-DCMAKE_PREFIX_PATH=/path/to/Qt/6.9.3/<compiler>` if Qt is not on the default search path.
 
+GPU backends are off by default. Add `-DSD_VULKAN=ON` on Windows or Linux, or `-DSD_METAL=ON` on macOS. Vulkan needs the LunarG SDK installed at configure time.
+
+Run the tests with:
+
+```
+ctest --test-dir build --output-on-failure
+```
+
 ## Models
 
 No weights are bundled. The Models screen reads `resources/models.json` and downloads on request, resuming interrupted transfers with range requests and verifying SHA-256 before marking anything installed.
@@ -71,6 +81,14 @@ Delete them from Settings, which shows exactly how much space each one reclaims 
 Vesper bundles `sd-cli` from stable-diffusion.cpp and runs it as a subprocess, parsing its progress output and reading back the finished PNG. Shelling out keeps the engine and the UI independent, and it makes per-platform packaging far simpler than linking the library directly. Linking is a reasonable optimization later, once this path is solid.
 
 Every result is written with a sidecar JSON holding the prompt, model, seed, sampler, and step count, so any image can be reproduced exactly.
+
+The engine prints sampling progress to stdout as carriage-return delimited lines like `| 5/20 - 1.23s/it`, which the bridge parses into the progress bar. Model loading lines report `MB/s` instead and are ignored.
+
+## Compositions
+
+Text layers are stored in normalized coordinates, so export resolution is independent of the editing viewport. Export runs through `QPainter` in C++ rather than a screen grab, which is what makes a 4K export from a 900px editor possible with type that stays sharp.
+
+Saving a composition writes two files next to each other, `name.png` and `name.composition.json`. Reopening the JSON restores every layer for further editing.
 
 ## Privacy
 
