@@ -99,14 +99,6 @@ jobs:
         with:
           arch: x64
 
-      - name: Install Vulkan SDK
-        uses: jakoch/install-vulkan-sdk-action@v1
-        with:
-          vulkan_version: 1.4.309.0
-          install_runtime: false
-          cache: true
-          stripdown: false
-
       - uses: jurplel/install-qt-action@v4
         with:
           version: ${{ env.QT_VERSION }}
@@ -119,9 +111,7 @@ jobs:
         run: >
           cmake -B build -G Ninja
           -DCMAKE_BUILD_TYPE=Release
-          -DSD_VULKAN=ON
           -DGGML_NATIVE=OFF
-          -DCMAKE_PREFIX_PATH="${VULKAN_SDK}"
 
       - name: Build
         run: cmake --build build

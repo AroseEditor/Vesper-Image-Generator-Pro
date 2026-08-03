@@ -25,7 +25,9 @@ Two things that usually need separate tools.
 - A C++20 compiler: MSVC 19.3x, Clang 15+, or GCC 12+
 - Around 15 GB free disk space per large model
 
-GPU acceleration is optional. Windows and Linux use Vulkan when a device is available, macOS uses Metal, and everything falls back to CPU.
+GPU acceleration is optional. Linux uses Vulkan when a device is available, macOS uses Metal, and everything falls back to CPU.
+
+The prebuilt Windows binaries are CPU-only for now. Vulkan works there when you build it yourself with `-DSD_VULKAN=ON`, but ggml's shader generator fails inside GitHub's Windows runners, so the published build leaves it off rather than shipping something that did not compile cleanly.
 
 ## Building
 
