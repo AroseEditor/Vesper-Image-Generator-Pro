@@ -110,7 +110,7 @@ void TestArgumentBuilder::imageToImageAddsInitAndStrength() {
     QCOMPARE(result.arguments.at(index + 1), QStringLiteral("0.42"));
 
     const int modeIndex = result.arguments.indexOf(QStringLiteral("--mode"));
-    QCOMPARE(result.arguments.at(modeIndex + 1), QStringLiteral("img2img"));
+    QCOMPARE(result.arguments.at(modeIndex + 1), QStringLiteral("img_gen"));
 }
 
 void TestArgumentBuilder::textToImageOmitsInitImage() {
@@ -120,7 +120,7 @@ void TestArgumentBuilder::textToImageOmitsInitImage() {
     QVERIFY(!result.arguments.contains(QStringLiteral("--strength")));
 
     const int modeIndex = result.arguments.indexOf(QStringLiteral("--mode"));
-    QCOMPARE(result.arguments.at(modeIndex + 1), QStringLiteral("txt2img"));
+    QCOMPARE(result.arguments.at(modeIndex + 1), QStringLiteral("img_gen"));
 }
 
 void TestArgumentBuilder::seedIsPassedThroughVerbatim() {

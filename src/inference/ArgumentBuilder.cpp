@@ -34,9 +34,7 @@ ArgumentBuildResult buildArguments(const GenerationRequest& request, const Model
     const QDir dir(modelsDirectory);
     QStringList args;
 
-    args << QStringLiteral("--mode")
-         << (request.mode == GenerationMode::ImageToImage ? QStringLiteral("img2img")
-                                                          : QStringLiteral("txt2img"));
+    args << QStringLiteral("--mode") << QStringLiteral("img_gen");
 
     for (const ModelFile& file : entry.files) {
         const QString flag = fileRoleToCliFlag(file.role);
